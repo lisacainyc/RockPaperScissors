@@ -8,20 +8,67 @@ function getComputerChoice(){
             result = "paper"
             break;
         case 2:
-            result = "scissor";
+            result = "scissors";
             break;
     }
     return result;
 }
-
-console.log(getComputerChoice());
 
 function getHumanChoice(){
     let input = prompt("Enter rock, paper, or scissors");
     return input;
 }
 
-console.log(getHumanChoice());
-
+const computerChoice = getComputerChoice();
+let humanChoice = getHumanChoice();
 let humanScore = 0;
 let computerScore = 0;
+
+function playRound(humanChoice, computerChoice){
+    humanChoice = humanChoice.toLowerCase();
+    let humanResult;
+
+    if (humanChoice === "rock"){
+        switch(computerChoice){
+            case "rock": 
+                humanResult = "draw";
+                break;
+            case "paper": 
+                humanResult = "lose";
+                break;
+            case "scissors": 
+                humanResult = "win";
+                break;               
+            } 
+    } else if (humanChoice === "paper") {
+        switch(computerChoice){
+            case "rock": 
+                humanResult = "win";
+                break;
+            case "paper": 
+                humanResult = "draw";
+                break;
+            case "scissors": 
+                humanResult = "lose";
+                break;               
+            } 
+    } else if (humanChoice === "scissors") {
+        switch(computerChoice){
+            case "rock": 
+                humanResult = "lose";
+                break;
+            case "paper": 
+                humanResult = "win";
+                break;
+            case "scissors": 
+                humanResult = "draw";
+                break;               
+            } 
+    }
+
+    return(humanResult);
+}
+
+console.log(humanChoice);
+console.log(computerChoice);
+console.log(playRound(humanChoice, computerChoice));
