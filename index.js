@@ -19,10 +19,17 @@ function getHumanChoice(){
     return input;
 }
 
-const computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
+function playGame(){
+
 let humanScore = 0;
 let computerScore = 0;
+let roundCounter = 0;
+console.log(roundCounter);
+
+while (roundCounter < 5){
+    
+const computerChoice = getComputerChoice();
+let humanChoice = getHumanChoice();
 
 function playRound(humanChoice, computerChoice){
     humanChoice = humanChoice.toLowerCase();
@@ -66,9 +73,20 @@ function playRound(humanChoice, computerChoice){
             } 
     }
 
-    return(humanResult);
+    if (humanResult === "win"){
+        humanScore++;
+        console.log(`You win! ${humanChoice} beats ${computerChoice}!`)
+    } else if (humanResult === "lose") {
+        computerScore++;
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
+    } else if (humanResult === "draw") {
+        console.log("It's a tie! Try again")
+    }
+}
+    playRound(humanChoice, computerChoice);
+    console.log(`Human: ${humanScore}, Computer: ${computerScore}`);
+    roundCounter++;
+}
 }
 
-console.log(humanChoice);
-console.log(computerChoice);
-console.log(playRound(humanChoice, computerChoice));
+playGame();
