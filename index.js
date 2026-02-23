@@ -1,3 +1,21 @@
+let humanChoice;
+let buttons = document.querySelector('.buttons');
+buttons.addEventListener('click', function(event){
+   clicked = event.target;
+   humanChoice = clicked.textContent;
+   let computerChoice = getComputerChoice();
+   playGame(humanChoice,computerChoice);
+});
+
+let resultsDiv = document.querySelector(".score");
+let roundsDiv = document.querySelector(".rounds");
+let winnerDiv = document.querySelector(".winner");
+
+let humanScore = 0;
+let computerScore = 0;
+let roundCounter = 0;
+console.log(roundCounter);
+
 function getComputerChoice(){
     let result = Math.floor(Math.random() * 3);
     switch(result){
@@ -12,24 +30,23 @@ function getComputerChoice(){
             break;
     }
     return result;
+};
+
+function playGame(humanChoice, computerChoice){
+
+playRound(humanChoice, computerChoice);
+
+if (humanScore === 5){
+    winnerDiv.textContent = ("Human wins!");
+    roundCounter = 0;
+} else if (computerScore === 5){
+    winnerDiv.textContent = ("Computer wins!");
+    roundCounter = 0;
 }
 
-function getHumanChoice(){
-    let input = prompt("Enter rock, paper, or scissors");
-    return input;
-}
-
-function playGame(){
-
-let humanScore = 0;
-let computerScore = 0;
-let roundCounter = 0;
-console.log(roundCounter);
-
-while (roundCounter < 5){
-    
-const computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
+roundsDiv.textContent = (`Human: ${humanScore}, Computer: ${computerScore}`);
+roundCounter++;
+};
 
 function playRound(humanChoice, computerChoice){
     humanChoice = humanChoice.toLowerCase();
@@ -75,18 +92,11 @@ function playRound(humanChoice, computerChoice){
 
     if (humanResult === "win"){
         humanScore++;
-        console.log(`You win! ${humanChoice} beats ${computerChoice}!`)
+        resultsDiv.textContent = (`You win! ${humanChoice} beats ${computerChoice}!`)
     } else if (humanResult === "lose") {
         computerScore++;
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
+        resultsDiv.textContent = (`You lose! ${computerChoice} beats ${humanChoice}`)
     } else if (humanResult === "draw") {
-        console.log("It's a tie! Try again")
+        resultsDiv.textContent = ("It's a tie! Try again")
     }
-}
-    playRound(humanChoice, computerChoice);
-    console.log(`Human: ${humanScore}, Computer: ${computerScore}`);
-    roundCounter++;
-}
-}
-
-playGame();
+};
